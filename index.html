@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0c0f14" />
+    <title>FrameSync — MP4 presenter</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="ambient ambient-one" aria-hidden="true"></div>
+    <div class="ambient ambient-two" aria-hidden="true"></div>
+
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#top" aria-label="FrameSync home">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span>
+            <span class="brand-name">FrameSync</span>
+            <span class="brand-type">MP4 presenter</span>
+          </span>
+        </a>
+
+        <div class="topbar-meta">
+          <span class="local-badge"><span class="live-dot"></span>Local session</span>
+          <span class="topbar-rule" aria-hidden="true"></span>
+          <span class="topbar-note">No uploads · plays in your browser</span>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="intro-block">
+          <div class="eyebrow"><span class="eyebrow-line"></span>Playback workspace</div>
+          <div class="intro-row">
+            <div>
+              <h1>Multi-screen<br /><em>presenter.</em></h1>
+              <p class="intro-copy">Load local MP4s into separate playing sections, then run every screen from one simple control deck.</p>
+            </div>
+            <div class="intro-side-note">
+              <span class="mono-label">SESSION MODE</span>
+              <span class="session-mode">Synchronized playback <span class="mode-arrow">↗</span></span>
+            </div>
+          </div>
+        </section>
+
+        <section class="control-deck floating-control-deck" aria-label="Floating session controls">
+          <div class="deck-heading">
+            <div>
+              <span class="mono-label">SESSION CONTROL</span>
+              <span class="deck-title">All playing sections</span>
+            </div>
+            <span class="session-state is-ready" id="session-state"><span class="state-dot"></span><span id="session-state-label">Ready to present</span></span>
+          </div>
+
+          <div class="deck-controls">
+            <div class="transport-group" role="group" aria-label="Playback controls">
+              <button class="transport-button primary" id="play-all" type="button" aria-label="Play all sections">
+                <span class="button-icon play-icon" aria-hidden="true"></span>
+                <span>Play</span>
+              </button>
+              <button class="transport-button" id="pause-all" type="button" aria-label="Pause all sections">
+                <span class="button-icon pause-icon" aria-hidden="true"></span>
+                <span>Pause</span>
+              </button>
+              <button class="transport-button" id="stop-all" type="button" aria-label="Stop and reset all sections">
+                <span class="button-icon stop-icon" aria-hidden="true"></span>
+                <span>Stop</span>
+              </button>
+            </div>
+
+            <div class="deck-divider" aria-hidden="true"></div>
+
+            <label class="volume-control" for="master-volume">
+              <span class="volume-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+              <span class="mono-label">MASTER VOLUME</span>
+              <input id="master-volume" type="range" min="0" max="100" value="80" />
+              <output id="master-volume-value" for="master-volume">80%</output>
+            </label>
+
+            <div class="deck-shortcuts">
+              <span class="mono-label">SHORTCUTS</span>
+              <span><kbd>Space</kbd> play / pause</span>
+              <span><kbd>R</kbd> reset</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="sections-section" aria-labelledby="sections-heading">
+          <div class="section-toolbar">
+            <div class="section-heading-group">
+              <span class="mono-label">PLAYING SECTIONS</span>
+              <h2 id="sections-heading">Your presentation canvas <span class="count-pill" id="section-count">01</span></h2>
+            </div>
+            <button class="add-button" id="add-section" type="button">
+              <span class="add-icon" aria-hidden="true">＋</span>
+              <span>Duplicate section</span>
+            </button>
+          </div>
+
+          <div class="sections-grid" id="sections" aria-live="polite"></div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span><span class="footer-mark">◌</span> Everything stays local to this browser tab.</span>
+        <span class="footer-right">FrameSync <span class="footer-slash">/</span> v1.0</span>
+      </footer>
+    </div>
+
+    <template id="section-template">
+      <article class="player-card" data-section-id="">
+        <div class="card-topline">
+          <div class="card-title-wrap">
+            <span class="section-number">01</span>
+            <div>
+              <span class="card-kicker">PLAYING SECTION</span>
+              <h3>Playing section 01</h3>
+            </div>
+          </div>
+          <div class="card-actions">
+            <span class="card-status status-ready"><span class="status-dot"></span><span class="status-label">Ready</span></span>
+            <button class="icon-button duplicate-section" type="button" title="Duplicate this section" aria-label="Duplicate this section">⧉</button>
+            <button class="icon-button remove-section" type="button" title="Remove this section" aria-label="Remove this section">×</button>
+          </div>
+        </div>
+
+        <div class="video-stage">
+          <video playsinline preload="metadata" aria-label="Playing section video"></video>
+          <div class="stage-grid" aria-hidden="true"></div>
+          <div class="stage-corner stage-corner-tl" aria-hidden="true"></div>
+          <div class="stage-corner stage-corner-br" aria-hidden="true"></div>
+          <div class="empty-stage">
+            <div class="upload-glyph" aria-hidden="true"><span class="upload-arrow"></span></div>
+            <strong>Choose an MP4 file</strong>
+            <span>Drop a file here or browse your computer</span>
+            <label class="browse-button">
+              <span>Browse files</span>
+              <input class="file-input" type="file" accept=".mp4,video/mp4" />
+            </label>
+          </div>
+          <div class="loaded-overlay">
+            <span class="video-badge"><span class="video-badge-dot"></span>LOCAL MP4</span>
+            <span class="video-time">00:00</span>
+          </div>
+        </div>
+
+        <div class="file-row">
+          <div class="file-details">
+            <span class="file-icon" aria-hidden="true">MP4</span>
+            <div class="file-copy">
+              <span class="file-name">No file selected</span>
+              <span class="file-meta">Waiting for a local video</span>
+            </div>
+          </div>
+          <label class="change-file-button">
+            <span>Change file</span>
+            <input class="file-input" type="file" accept=".mp4,video/mp4" />
+          </label>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js"></script>
+  </body>
+</html>
