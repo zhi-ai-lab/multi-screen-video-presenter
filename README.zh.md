@@ -38,8 +38,8 @@ start index.html      # Windows
 克隆仓库，运行对应系统的安装脚本。它会先询问界面语言（默认英文；输入 `z` 切换中文），然后只需一个 **Yes** 即以默认设置继续。
 
 ```powershell
-# Windows
-powershell -ExecutionPolicy Bypass -File .\install.ps1
+# Windows —— 双击 install.cmd，或在终端中运行：
+.\install.cmd
 ```
 
 ```bash
@@ -51,13 +51,15 @@ bash install.sh
 
 ```powershell
 # Windows
-powershell -ExecutionPolicy Bypass -File .\install.ps1 -Yes -Port 8081
+.\install.cmd -Yes -Port 8081
 ```
 
 ```bash
 # macOS / Linux
 bash install.sh --yes --port 8081
 ```
+
+> Windows 默认禁止直接运行 `.ps1` 文件（即“running scripts is disabled”错误）。`install.cmd` 只是用 `-ExecutionPolicy Bypass` 启动 `install.ps1`；若想自己调用，可用 `powershell -ExecutionPolicy Bypass -File .\install.ps1`。
 
 随后打开它打印出的地址（默认 <http://localhost:8081/>）。要在局域网共享视频，把 `.mp4` 放进 `local/videos/`——它们会出现在 `http://<主机>:8081/videos/`。
 
@@ -85,6 +87,7 @@ multi-screen-video-presenter/
 ├── assets/
 │   ├── scripts/app.js    # 播放引擎、国际化、主题、区块逻辑
 │   └── styles/styles.css # 设计系统：主题、布局、组件
+├── install.cmd           # Windows 启动器（调用 install.ps1，免去执行策略问题）
 ├── install.ps1           # 交互式 / 一行命令安装脚本 —— Windows
 ├── install.sh            # 交互式 / 一行命令安装脚本 —— macOS / Linux
 ├── nginx.conf.template   # 安装脚本据以填充的配置模板

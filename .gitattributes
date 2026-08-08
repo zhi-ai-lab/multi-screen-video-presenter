@@ -1,1 +1,5 @@
 * text=auto eol=lf
+
+# Windows batch launchers must use CRLF to run reliably from Explorer/cmd.
+*.cmd text eol=crlf
+*.bat text eol=crlf

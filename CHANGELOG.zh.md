@@ -12,6 +12,7 @@ FrameSync 的所有重要变更都记录于此。
 ### 新增
 
 - **安装脚本**——`install.ps1`（Windows）与 `install.sh`（macOS/Linux），均提供交互模式与一行命令的非交互模式。它们选择界面语言（默认英文，可切换中文），**在缺少 nginx 时自动安装**（Windows：下载 1.31.3 版本；macOS/Linux：`brew`/`apt`/`dnf`/`yum`，否则获取官方源码），随后写入配置并启动 nginx。路径默认指向项目内部（站点 = 项目文件夹，视频 = `local/videos`），端口默认 **8081**，因此在未提供任何位置时，安装脚本只需一个 Yes/No 确认。非交互：`install.ps1 -Yes -Port 8081` / `install.sh --yes --port 8081`；可选 `-SiteRoot/-VideoRoot/-NginxDir/-AutoStart`（Windows）与 `--site/--video/--nginx`（Unix）；`-Help`/`--help` 查看列表。
+- **`install.cmd`**——Windows 启动器，用 `-ExecutionPolicy Bypass` 运行 `install.ps1`（可双击，参数透传），使用户不再遇到“running scripts is disabled”错误。
 - **`nginx.conf.template`**——一份自包含的配置模板，供安装脚本填充（也可手动填写）；用于提供演示台，并暴露 `/videos/` 下载索引。
 - 双语项目文档：`README.md` / `README.zh.md` 与 `CHANGELOG.md` / `CHANGELOG.zh.md`，围绕“一段话概述 + 分步部署”重写。
 - 用于存放私有、机器专属文件的 `local/` 文件夹（已被 git 忽略），包括在 `local/nginx-runtime/` 下生成的运行时配置与日志。

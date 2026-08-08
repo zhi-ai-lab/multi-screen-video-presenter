@@ -38,8 +38,8 @@ To reach the presenter from other screens on the same network, serve it with [ng
 Clone the repo, then run the installer for your OS. It asks your language first (English by default; type `z` for 中文), then a single **Yes** to proceed with the defaults.
 
 ```powershell
-# Windows
-powershell -ExecutionPolicy Bypass -File .\install.ps1
+# Windows — double-click install.cmd, or run it in a terminal:
+.\install.cmd
 ```
 
 ```bash
@@ -51,13 +51,15 @@ bash install.sh
 
 ```powershell
 # Windows
-powershell -ExecutionPolicy Bypass -File .\install.ps1 -Yes -Port 8081
+.\install.cmd -Yes -Port 8081
 ```
 
 ```bash
 # macOS / Linux
 bash install.sh --yes --port 8081
 ```
+
+> Windows blocks running `.ps1` files directly (the "running scripts is disabled" error). `install.cmd` just launches `install.ps1` with `-ExecutionPolicy Bypass`; if you'd rather call it yourself, use `powershell -ExecutionPolicy Bypass -File .\install.ps1`.
 
 Then open the URL it prints (default <http://localhost:8081/>). To share videos over the LAN, drop `.mp4` files into `local/videos/` — they show up at `http://<host>:8081/videos/`.
 
@@ -85,6 +87,7 @@ multi-screen-video-presenter/
 ├── assets/
 │   ├── scripts/app.js    # playback engine, i18n, theming, section logic
 │   └── styles/styles.css # design system: themes, layout, components
+├── install.cmd           # Windows launcher (runs install.ps1, no exec-policy fuss)
 ├── install.ps1           # interactive / one-line installer — Windows
 ├── install.sh            # interactive / one-line installer — macOS / Linux
 ├── nginx.conf.template   # config the installers fill in
