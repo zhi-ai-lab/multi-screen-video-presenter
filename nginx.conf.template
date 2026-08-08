@@ -1,0 +1,73 @@
+# =============================================================================
+#  FrameSync — nginx config TEMPLATE
+#  This file is filled in by install.ps1 / install.sh. You normally don't edit
+#  it by hand — re-run the installer instead. If you DO configure nginx by hand,
+#  replace every <PLACEHOLDER> token below with a real path/port (forward
+#  slashes, even on Windows) and save the result as your nginx config.
+#
+#  本文件由 install.ps1 / install.sh 自动填充。通常无需手动编辑——重新运行安装脚本即可。
+#  若要手动配置，请把下面每个 <占位符> 替换成真实路径/端口（即使在 Windows 上也用正斜杠）。
+# =============================================================================
+
+worker_processes  1;
+error_log  {{LOG_DIR}}/error.log;
+pid        {{LOG_DIR}}/nginx.pid;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    default_type  application/octet-stream;
+
+    # Self-contained MIME map so this config doesn't depend on mime.types.
+    types {
+        text/html                 html htm;
+        text/css                  css;
+        application/javascript    js mjs;
+        application/json          json;
+        image/svg+xml             svg;
+        image/png                 png;
+        image/jpeg                jpg jpeg;
+        image/gif                 gif;
+        image/x-icon              ico;
+        font/woff2                woff2;
+        video/mp4                 mp4 m4v;
+        video/webm                webm;
+        text/plain                txt;
+    }
+
+    sendfile           on;
+    keepalive_timeout  65;
+    access_log         {{LOG_DIR}}/access.log;
+
+    # Writable temp dirs (created by the installer under the runtime folder).
+    client_body_temp_path  {{TEMP_DIR}}/client_body;
+    proxy_temp_path        {{TEMP_DIR}}/proxy;
+    fastcgi_temp_path      {{TEMP_DIR}}/fastcgi;
+    uwsgi_temp_path        {{TEMP_DIR}}/uwsgi;
+    scgi_temp_path         {{TEMP_DIR}}/scgi;
+
+    server {
+        listen       {{PORT}};
+        server_name  localhost;
+
+        # ---- The presenter app (index.html + assets) ----
+        root   "{{SITE_ROOT}}";
+        index  index.html;
+
+        location / {
+            try_files $uri $uri/ =404;
+        }
+
+        # ---- Browse & download your videos over the LAN ----
+        #  >>> Serving the presenter needs nothing here, but if you want other
+        #      machines to pull video files, point this at your video folder. <<<
+        #  >>> 提供演示台本身无需改这里；但若想让其他机器下载视频文件，
+        #      请把下面的路径改成你的视频文件夹。 <<<
+        location /videos/ {
+            alias      "{{VIDEO_ROOT}}/";
+            autoindex  on;
+        }
+    }
+}

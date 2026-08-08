@@ -1,5 +1,7 @@
-# Local nginx binary distribution (not source)
-nginx/
+# Folder-level ignores only — keep individual files out of this list.
+# Drop anything machine-specific or private in here (shortcuts, personal
+# videos, scratch scripts). The folder name shields local file names too.
+local/
 
-# Windows shortcuts
-*.lnk
+# nginx binary distribution (the unpacked release folder, not our source).
+nginx/
