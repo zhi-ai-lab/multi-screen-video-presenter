@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,28 +19,171 @@
           </span>
           <span>
             <span class="brand-name">FrameSync</span>
-            <span class="brand-type">MP4 presenter</span>
+            <span class="brand-type" data-i18n="brandType">MP4 presenter</span>
           </span>
         </a>
 
         <div class="topbar-meta">
-          <span class="local-badge"><span class="live-dot"></span>Local session</span>
+          <span class="local-badge"><span class="live-dot"></span><span data-i18n="localSession">Local session</span></span>
           <span class="topbar-rule" aria-hidden="true"></span>
-          <span class="topbar-note">No uploads · plays in your browser</span>
+          <span class="topbar-note" data-i18n="topbarNote">No uploads · plays in your browser</span>
+          <span class="topbar-rule" aria-hidden="true"></span>
+          <div class="topbar-controls">
+            <button class="lang-toggle" id="lang-toggle" type="button" aria-label="Language / 语言">
+              <span class="lang-opt" data-lang-opt="zh">中</span>
+              <span class="lang-opt" data-lang-opt="en">EN</span>
+            </button>
+            <div class="theme-menu">
+              <button class="theme-menu-trigger" id="theme-trigger" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="theme-panel" aria-label="Choose color theme">
+                <span class="theme-swatch" id="theme-swatch" aria-hidden="true"></span>
+                <span data-i18n="theme">Theme</span>
+                <span class="theme-caret" aria-hidden="true">▾</span>
+              </button>
+              <div class="theme-panel" id="theme-panel" role="menu" hidden>
+                <div class="theme-panel-head">
+                  <span class="theme-panel-title" data-i18n="themePickTitle">Choose a color theme</span>
+                  <span class="theme-panel-sub" data-i18n="themePickHint">Light &amp; dark themes — switch anytime</span>
+                </div>
+                <div class="theme-group">
+                  <span class="theme-group-label" data-i18n="lightModes">Light modes</span>
+                  <button class="theme-option" data-theme-value="latte" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-latte" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeLatte">Latte</span>
+                      <span class="theme-option-desc" data-i18n="themeLatteDesc">Warm coffee</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="ricepaper" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-ricepaper" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeRice">Rice Paper</span>
+                      <span class="theme-option-desc" data-i18n="themeRiceDesc">Blush &amp; sky</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="sunnycream" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-sunnycream" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeSunny">Sunny Cream</span>
+                      <span class="theme-option-desc" data-i18n="themeSunnyDesc">Cream &amp; tomato red</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="blushmeadow" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-blushmeadow" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeBlush">Blush Meadow</span>
+                      <span class="theme-option-desc" data-i18n="themeBlushDesc">Sakura &amp; pine green</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="tarolatte" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-tarolatte" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeTaro">Taro Latte</span>
+                      <span class="theme-option-desc" data-i18n="themeTaroDesc">Taro &amp; caramel</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="neon" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-neon" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeNeon">Neon Trio</span>
+                      <span class="theme-option-desc" data-i18n="themeNeonDesc">Neon purple &amp; blue</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="springfield" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-springfield" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeSpring">Spring Field</span>
+                      <span class="theme-option-desc" data-i18n="themeSpringDesc">Mint &amp; forest green</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                </div>
+                <div class="theme-group">
+                  <span class="theme-group-label" data-i18n="darkModes">Dark modes</span>
+                  <button class="theme-option" data-theme-value="lime" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-lime" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeLime">Midnight Lime</span>
+                      <span class="theme-option-desc" data-i18n="themeLimeDesc">Navy &amp; lime</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="klein" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-klein" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeKlein">Klein Blue</span>
+                      <span class="theme-option-desc" data-i18n="themeKleinDesc">Electric blue &amp; orange</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="scheele" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-scheele" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeScheele">Scheele Green</span>
+                      <span class="theme-option-desc" data-i18n="themeScheeleDesc">Ink black &amp; green</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="hermes" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-hermes" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeHermes">Hermès Orange</span>
+                      <span class="theme-option-desc" data-i18n="themeHermesDesc">Ink black &amp; orange</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="prada" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-prada" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themePrada">Prada Blue</span>
+                      <span class="theme-option-desc" data-i18n="themePradaDesc">Ink black &amp; blue</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="peacock" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-peacock" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themePeacock">Peacock</span>
+                      <span class="theme-option-desc" data-i18n="themePeacockDesc">Ink black &amp; teal</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                  <button class="theme-option" data-theme-value="gucci" role="menuitemradio" type="button">
+                    <span class="theme-preview preview-gucci" aria-hidden="true"><span class="dot dot-a"></span><span class="dot dot-b"></span></span>
+                    <span class="theme-option-text">
+                      <span class="theme-option-name" data-i18n="themeGucci">Gucci Green</span>
+                      <span class="theme-option-desc" data-i18n="themeGucciDesc">Deep green &amp; apricot</span>
+                    </span>
+                    <span class="theme-check" aria-hidden="true">✓</span>
+                  </button>
+                </div>
+              </div>
+              <div class="theme-tip" id="theme-tip" hidden>
+                <span class="theme-tip-title" data-i18n="tipTitle">New: color themes</span>
+                <span class="theme-tip-text" data-i18n="tipText">Pick from a range of light and dark themes here — your choice is remembered.</span>
+                <button class="theme-tip-dismiss" id="theme-tip-dismiss" type="button" data-i18n="tipGotIt">Got it</button>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
       <main id="top">
         <section class="intro-block">
-          <div class="eyebrow"><span class="eyebrow-line"></span>Playback workspace</div>
+          <div class="eyebrow"><span class="eyebrow-line"></span><span data-i18n="eyebrow">Playback workspace</span></div>
           <div class="intro-row">
             <div>
-              <h1>Multi-screen<br /><em>presenter.</em></h1>
-              <p class="intro-copy">Load local MP4s into separate playing sections, then run every screen from one simple control deck.</p>
+              <h1><span data-i18n="h1a">Multi-screen</span><br /><em data-i18n="h1b">presenter.</em></h1>
+              <p class="intro-copy" data-i18n="introCopy">Load local MP4s into separate playing sections, then run every screen from one simple control deck.</p>
             </div>
             <div class="intro-side-note">
-              <span class="mono-label">SESSION MODE</span>
-              <span class="session-mode">Synchronized playback <span class="mode-arrow">↗</span></span>
+              <span class="mono-label" data-i18n="sessionModeLabel">SESSION MODE</span>
+              <span class="session-mode"><span data-i18n="sessionModeText">Synchronized playback</span> <span class="mode-arrow">↗</span></span>
             </div>
           </div>
         </section>
@@ -48,25 +191,29 @@
         <section class="control-deck" aria-label="Session controls">
           <div class="deck-heading">
             <div>
-              <span class="mono-label">SESSION CONTROL</span>
-              <span class="deck-title">All playing sections</span>
+              <span class="mono-label" data-i18n="sessionControl">SESSION CONTROL</span>
+              <span class="deck-title" data-i18n="deckTitle">All playing sections</span>
             </div>
-            <span class="session-state is-ready" id="session-state"><span class="state-dot"></span><span id="session-state-label">Ready to present</span></span>
+            <span class="session-state is-ready" id="session-state"><span class="state-dot"></span><span id="session-state-label" data-i18n="ssReadyPresent">Ready to present</span></span>
           </div>
 
           <div class="deck-controls">
             <div class="transport-group" role="group" aria-label="Playback controls">
               <button class="transport-button primary" id="play-all" type="button" aria-label="Play all sections">
                 <span class="button-icon play-icon" aria-hidden="true"></span>
-                <span>Play</span>
+                <span data-i18n="btnPlay">Play</span>
               </button>
               <button class="transport-button" id="pause-all" type="button" aria-label="Pause all sections">
                 <span class="button-icon pause-icon" aria-hidden="true"></span>
-                <span>Pause</span>
+                <span data-i18n="btnPause">Pause</span>
               </button>
               <button class="transport-button" id="stop-all" type="button" aria-label="Stop and reset all sections">
                 <span class="button-icon stop-icon" aria-hidden="true"></span>
-                <span>Stop</span>
+                <span data-i18n="btnStop">Stop</span>
+              </button>
+              <button class="loop-switch" id="loop-all" type="button" role="switch" aria-checked="false" aria-label="Loop all sections">
+                <span class="loop-switch-label" data-i18n="btnLoop">Loop</span>
+                <span class="loop-switch-track" aria-hidden="true"><span class="loop-switch-thumb"></span></span>
               </button>
             </div>
 
@@ -74,15 +221,16 @@
 
             <label class="volume-control" for="master-volume">
               <span class="volume-icon" aria-hidden="true"><span></span><span></span><span></span></span>
-              <span class="mono-label">MASTER VOLUME</span>
+              <span class="mono-label" data-i18n="masterVolume">MASTER VOLUME</span>
               <input id="master-volume" type="range" min="0" max="100" value="80" />
               <output id="master-volume-value" for="master-volume">80%</output>
             </label>
 
             <div class="deck-shortcuts">
-              <span class="mono-label">SHORTCUTS</span>
-              <span><kbd>Space</kbd> play / pause</span>
-              <span><kbd>R</kbd> reset</span>
+              <span class="mono-label" data-i18n="shortcuts">SHORTCUTS</span>
+              <span><kbd>Space</kbd> <span data-i18n="scPlayPause">play / pause</span></span>
+              <span><kbd>R</kbd> <span data-i18n="scReset">reset</span></span>
+              <span><kbd>L</kbd> <span data-i18n="scLoop">loop</span></span>
             </div>
           </div>
         </section>
@@ -90,12 +238,12 @@
         <section class="sections-section" aria-labelledby="sections-heading">
           <div class="section-toolbar">
             <div class="section-heading-group">
-              <span class="mono-label">PLAYING SECTIONS</span>
-              <h2 id="sections-heading">Your presentation canvas <span class="count-pill" id="section-count">01</span></h2>
+              <span class="mono-label" data-i18n="playingSections">PLAYING SECTIONS</span>
+              <h2 id="sections-heading"><span data-i18n="sectionsHeading">Your presentation canvas</span> <span class="count-pill" id="section-count">01</span></h2>
             </div>
             <button class="add-button" id="add-section" type="button">
               <span class="add-icon" aria-hidden="true">＋</span>
-              <span>Duplicate section</span>
+              <span data-i18n="addSection">Duplicate section</span>
             </button>
           </div>
 
@@ -104,7 +252,7 @@
       </main>
 
       <footer class="footer">
-        <span><span class="footer-mark">◌</span> Everything stays local to this browser tab.</span>
+        <span><span class="footer-mark">◌</span> <span data-i18n="footerLocal">Everything stays local to this browser tab.</span></span>
         <span class="footer-right">FrameSync <span class="footer-slash">/</span> v1.0</span>
       </footer>
     </div>
@@ -115,14 +263,14 @@
           <div class="card-title-wrap">
             <span class="section-number">01</span>
             <div>
-              <span class="card-kicker">PLAYING SECTION</span>
+              <span class="card-kicker" data-i18n="cardKicker">PLAYING SECTION</span>
               <h3>Playing section 01</h3>
             </div>
           </div>
           <div class="card-actions">
             <span class="card-status status-ready"><span class="status-dot"></span><span class="status-label">Ready</span></span>
-            <button class="icon-button duplicate-section" type="button" title="Duplicate this section" aria-label="Duplicate this section">⧉</button>
-            <button class="icon-button remove-section" type="button" title="Remove this section" aria-label="Remove this section">×</button>
+            <button class="icon-button duplicate-section" type="button">⧉</button>
+            <button class="icon-button remove-section" type="button">×</button>
           </div>
         </div>
 
@@ -133,15 +281,15 @@
           <div class="stage-corner stage-corner-br" aria-hidden="true"></div>
           <div class="empty-stage">
             <div class="upload-glyph" aria-hidden="true"><span class="upload-arrow"></span></div>
-            <strong>Choose an MP4 file</strong>
-            <span>Drop a file here or browse your computer</span>
+            <strong data-i18n="emptyTitle">Choose an MP4 file</strong>
+            <span data-i18n="emptyHint">Drop a file here or browse your computer</span>
             <label class="browse-button">
-              <span>Browse files</span>
+              <span data-i18n="browseFiles">Browse files</span>
               <input class="file-input" type="file" accept=".mp4,video/mp4" />
             </label>
           </div>
           <div class="loaded-overlay">
-            <span class="video-badge"><span class="video-badge-dot"></span>LOCAL MP4</span>
+            <span class="video-badge"><span class="video-badge-dot"></span><span data-i18n="localMp4">LOCAL MP4</span></span>
             <span class="video-time">00:00</span>
           </div>
         </div>
@@ -155,7 +303,7 @@
             </div>
           </div>
           <label class="change-file-button">
-            <span>Change file</span>
+            <span data-i18n="changeFile">Change file</span>
             <input class="file-input" type="file" accept=".mp4,video/mp4" />
           </label>
         </div>
