@@ -77,7 +77,31 @@ bash install.sh --yes --port 8081
    nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf
    ```
 
-修改配置后用 `nginx -s reload` 重载；用 `nginx -s stop` 停止。
+### 启动、停止、重启
+
+以下命令请在项目根目录下运行。重新运行安装脚本（`-Yes` / `--yes`）会重新配置**并重启**；而原生 `nginx` 命令则作用于安装脚本已在 `local/nginx-runtime/` 下生成的配置。Windows 上二进制是 `nginx\nginx.exe`，macOS/Linux 上是 PATH 中的 `nginx`。
+
+**Windows**
+
+```powershell
+.\install.cmd -Yes                                                                  # 启动 / 重启（重新生成配置）
+nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf             # 用现有配置启动
+nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s reload   # 修改配置后重载
+nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s stop     # 停止
+```
+
+**macOS / Linux**
+
+```bash
+bash install.sh --yes                                                        # 启动 / 重启（重新生成配置）
+nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf           # 用现有配置启动
+nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s reload # 修改配置后重载
+nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s stop   # 停止
+```
+
+**重启：** 要么重新运行安装脚本，要么先 `stop` 再 `start`。若只改了配置，用 `-s reload` 即可无中断生效。
+
+**重启电脑之后：** 除非你启用了开机自启（Windows：在管理员终端运行 `.\install.cmd -Yes -AutoStart`，nginx 将以 SYSTEM 身份运行），否则 nginx 不会自行恢复——重新运行上面的启动命令即可。若启用了自启，停止时也请在管理员终端中执行，因为服务以 SYSTEM 身份运行。
 
 ## 项目结构
 

@@ -77,7 +77,31 @@ On Windows the installer downloads the nginx **1.31.3** Windows build. On macOS/
    nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf
    ```
 
-Reload after editing the config with `nginx -s reload`; stop with `nginx -s stop`.
+### Start, stop, restart
+
+Run these from the project root. Re-running the installer (`-Yes` / `--yes`) reconfigures **and restarts**; the raw `nginx` commands act on the config the installer already generated under `local/nginx-runtime/`. On Windows the binary is `nginx\nginx.exe`; on macOS/Linux it's `nginx` on your PATH.
+
+**Windows**
+
+```powershell
+.\install.cmd -Yes                                                                  # start / restart (fresh config)
+nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf             # start with existing config
+nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s reload   # reload after editing config
+nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s stop     # stop
+```
+
+**macOS / Linux**
+
+```bash
+bash install.sh --yes                                                        # start / restart (fresh config)
+nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf           # start with existing config
+nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s reload # reload after editing config
+nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s stop   # stop
+```
+
+**To restart:** either re-run the installer, or `stop` then `start`. If you only changed the config, `-s reload` applies it with no downtime.
+
+**After a reboot:** nginx does **not** come back on its own unless you enabled boot-on-start (Windows: `.\install.cmd -Yes -AutoStart` from an Administrator terminal, which runs nginx as SYSTEM). Otherwise just run the start command above again. If you enabled auto-start, run `stop` from an Administrator terminal too, since the server runs as SYSTEM.
 
 ## Project structure
 

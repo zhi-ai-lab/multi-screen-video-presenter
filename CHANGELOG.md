@@ -15,6 +15,7 @@ English · [简体中文](CHANGELOG.zh.md)
 - **`install.cmd`** — a Windows launcher that runs `install.ps1` with `-ExecutionPolicy Bypass` (double-click friendly; args pass through), so users don't hit the "running scripts is disabled" error.
 - **`nginx.conf.template`** — a single, self-contained config the installers fill in (or you fill in by hand); serves the presenter and exposes a `/videos/` download index.
 - Bilingual project documentation: `README.md` / `README.zh.md` and `CHANGELOG.md` / `CHANGELOG.zh.md`, rewritten around a one-paragraph overview plus step-by-step deployment.
+- README "Start, stop, restart" section with per-platform commands (Windows and macOS/Linux) and after-reboot guidance.
 - `local/` folder for private, machine-specific files (git-ignored), including the runtime config and logs generated under `local/nginx-runtime/`.
 
 ### Changed

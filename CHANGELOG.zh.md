@@ -15,6 +15,7 @@ FrameSync 的所有重要变更都记录于此。
 - **`install.cmd`**——Windows 启动器，用 `-ExecutionPolicy Bypass` 运行 `install.ps1`（可双击，参数透传），使用户不再遇到“running scripts is disabled”错误。
 - **`nginx.conf.template`**——一份自包含的配置模板，供安装脚本填充（也可手动填写）；用于提供演示台，并暴露 `/videos/` 下载索引。
 - 双语项目文档：`README.md` / `README.zh.md` 与 `CHANGELOG.md` / `CHANGELOG.zh.md`，围绕“一段话概述 + 分步部署”重写。
+- README 新增“启动、停止、重启”一节，含各平台（Windows 与 macOS/Linux）命令及重启电脑后的说明。
 - 用于存放私有、机器专属文件的 `local/` 文件夹（已被 git 忽略），包括在 `local/nginx-runtime/` 下生成的运行时配置与日志。
 
 ### 变更
