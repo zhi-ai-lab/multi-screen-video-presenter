@@ -16,12 +16,18 @@ FrameSync 的所有重要变更都记录于此。
 - **`nginx.conf.template`**——一份自包含的配置模板，供安装脚本填充（也可手动填写）；用于提供演示台，并暴露 `/videos/` 下载索引。
 - 双语项目文档：`README.md` / `README.zh.md` 与 `CHANGELOG.md` / `CHANGELOG.zh.md`，围绕“一段话概述 + 分步部署”重写。
 - README 新增“启动、停止、重启”一节，含各平台（Windows 与 macOS/Linux）命令及重启电脑后的说明。
+- README 新增“卸载”一节：停止 nginx、移除开机自启任务、删除文件夹，以及（macOS/Linux）移除由包管理器安装的 nginx 及其 80 端口系统服务。
 - 用于存放私有、机器专属文件的 `local/` 文件夹（已被 git 忽略），包括在 `local/nginx-runtime/` 下生成的运行时配置与日志。
 
 ### 变更
 
 - 将仓库重构为常见的静态站点结构：脚本移至 `assets/scripts/`，样式移至 `assets/styles/`，并相应更新 `index.html`。
 - `.gitignore` 现在只在文件夹层级忽略——不再使用单文件通配规则。新增一个私有的 `local/` 文件夹，与已被忽略的 `nginx/` 一同，把机器专属文件（及其名称）挡在版本控制之外。
+
+### 修复
+
+- `install.ps1` 在下载 nginx 前强制启用 TLS 1.2，使其在原生 Windows PowerShell 5.1 上也能从 `https://nginx.org` 正常下载（否则会协商到旧协议而失败）。
+- `install.ps1` 在启动后会校验 nginx 是否真的保持运行，并指向 `error.log`（例如端口被占用），而非一律报告成功。
 
 ### 移除
 

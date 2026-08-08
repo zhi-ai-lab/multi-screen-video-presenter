@@ -103,6 +103,24 @@ nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s stop   # s
 
 **After a reboot:** nginx does **not** come back on its own unless you enabled boot-on-start (Windows: `.\install.cmd -Yes -AutoStart` from an Administrator terminal, which runs nginx as SYSTEM). Otherwise just run the start command above again. If you enabled auto-start, run `stop` from an Administrator terminal too, since the server runs as SYSTEM.
 
+## Uninstall
+
+Nothing is installed system-wide by default — the app, the nginx binary (on Windows), and everything the installer generates all live inside the project folder. To remove it cleanly:
+
+1. **Stop nginx** (see *Start, stop, restart*). On Windows the folder stays locked until nginx exits.
+2. **Remove boot-on-start**, if you enabled `-AutoStart` (Windows, Administrator):
+   ```powershell
+   schtasks /Delete /TN "Nginx Auto Start" /F
+   ```
+3. **Delete the project folder** — that removes the app, `nginx/`, and everything under `local/`.
+4. **If the installer installed nginx from a package manager** (macOS/Linux) and you don't want to keep it, remove it separately — and note the package also starts a *system* nginx on port 80:
+   ```bash
+   sudo systemctl disable --now nginx   # Linux: stop the system service
+   sudo apt-get remove --purge nginx nginx-common   # Debian/Ubuntu
+   # brew services stop nginx && brew uninstall nginx   # macOS
+   ```
+5. **Firewall (Windows):** if you allowed nginx through Windows Defender Firewall, remove that inbound rule if you no longer need it.
+
 ## Project structure
 
 ```

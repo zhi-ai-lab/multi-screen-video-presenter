@@ -16,12 +16,18 @@ English · [简体中文](CHANGELOG.zh.md)
 - **`nginx.conf.template`** — a single, self-contained config the installers fill in (or you fill in by hand); serves the presenter and exposes a `/videos/` download index.
 - Bilingual project documentation: `README.md` / `README.zh.md` and `CHANGELOG.md` / `CHANGELOG.zh.md`, rewritten around a one-paragraph overview plus step-by-step deployment.
 - README "Start, stop, restart" section with per-platform commands (Windows and macOS/Linux) and after-reboot guidance.
+- README "Uninstall" section: stop nginx, remove the boot-on-start task, delete the folder, and (macOS/Linux) remove the package-managed nginx and its port-80 system service.
 - `local/` folder for private, machine-specific files (git-ignored), including the runtime config and logs generated under `local/nginx-runtime/`.
 
 ### Changed
 
 - Restructured the repository into a conventional static-site layout: scripts moved to `assets/scripts/`, styles to `assets/styles/`, and `index.html` updated to match.
 - `.gitignore` now ignores at the folder level only — no per-file patterns. A private `local/` folder joins the already-ignored `nginx/`, keeping machine-specific files (and their names) out of version control.
+
+### Fixed
+
+- `install.ps1` now forces TLS 1.2 before downloading nginx, so the fetch from `https://nginx.org` works on a stock Windows PowerShell 5.1 (which otherwise negotiates an old protocol and fails).
+- `install.ps1` verifies nginx actually stayed up after starting and points at `error.log` (e.g. port already in use) instead of always reporting success.
 
 ### Removed
 

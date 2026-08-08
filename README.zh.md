@@ -103,6 +103,24 @@ nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s stop   # �
 
 **重启电脑之后：** 除非你启用了开机自启（Windows：在管理员终端运行 `.\install.cmd -Yes -AutoStart`，nginx 将以 SYSTEM 身份运行），否则 nginx 不会自行恢复——重新运行上面的启动命令即可。若启用了自启，停止时也请在管理员终端中执行，因为服务以 SYSTEM 身份运行。
 
+## 卸载
+
+默认情况下不会安装任何系统级内容——应用、nginx 二进制（Windows 上）以及安装脚本生成的一切，都在项目文件夹内。要干净地移除：
+
+1. **停止 nginx**（见*启动、停止、重启*）。Windows 上，nginx 退出前文件夹会一直被占用。
+2. **移除开机自启**（若你启用了 `-AutoStart`，Windows，管理员）：
+   ```powershell
+   schtasks /Delete /TN "Nginx Auto Start" /F
+   ```
+3. **删除项目文件夹**——这会移除应用、`nginx/` 以及 `local/` 下的一切。
+4. **若安装脚本通过包管理器安装了 nginx**（macOS/Linux），且你不想保留，请单独移除——注意该软件包还会在 80 端口启动一个*系统级* nginx：
+   ```bash
+   sudo systemctl disable --now nginx   # Linux：停止系统服务
+   sudo apt-get remove --purge nginx nginx-common   # Debian/Ubuntu
+   # brew services stop nginx && brew uninstall nginx   # macOS
+   ```
+5. **防火墙（Windows）：** 若你曾允许 nginx 通过 Windows Defender 防火墙，不再需要时可删除该入站规则。
+
 ## 项目结构
 
 ```

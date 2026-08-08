@@ -66,6 +66,7 @@ $Strings = @{
         testing  = "Checking the config ..."
         testBad  = "nginx rejected the config. See the message above."
         started  = "nginx is running."
+        startFail= "nginx did not stay up — check local\nginx-runtime\logs\error.log (is port {0} already in use?)."
         bootNeedAdmin = "Boot-on-start needs an Administrator PowerShell. Skipping — re-run with -AutoStart from an admin shell."
         bootDone = "Registered the 'Nginx Auto Start' scheduled task."
         videoTip = "Put videos to share over the LAN in:"
@@ -85,6 +86,7 @@ $Strings = @{
         testing  = "正在检查配置 ..."
         testBad  = "nginx 拒绝了该配置，请看上方信息。"
         started  = "nginx 正在运行。"
+        startFail= "nginx 未能保持运行——请查看 local\nginx-runtime\logs\error.log（端口 {0} 是否被占用？）。"
         bootNeedAdmin = "开机自启需要「以管理员身份运行」的 PowerShell。已跳过——请在管理员终端中带 -AutoStart 重新运行。"
         bootDone = "已注册计划任务「Nginx Auto Start」。"
         videoTip = "把要在局域网共享的视频放到："
@@ -100,6 +102,8 @@ function Fail($m) { Write-Host $m -ForegroundColor Red }
 function Slash($p){ return ($p -replace '\\','/') }
 
 function Get-Nginx($dir, $version) {
+    # PowerShell 5.1 defaults to old TLS; nginx.org needs TLS 1.2+.
+    try { [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12 } catch {}
     New-Item -ItemType Directory -Force -Path $dir | Out-Null
     $zip = Join-Path $env:TEMP "nginx-$version.zip"
     Invoke-WebRequest -Uri "https://nginx.org/download/nginx-$version.zip" -OutFile $zip
@@ -171,7 +175,8 @@ if (-not $NoStart) {
     Start-Sleep -Seconds 1
     Start-Process -FilePath $nginxExe -WorkingDirectory $NginxDir -ArgumentList @("-p", $runtime, "-c", $confPath) -NoNewWindow
     Start-Sleep -Seconds 1
-    Ok $S.started
+    if (Get-Process -Name nginx -ErrorAction SilentlyContinue) { Ok $S.started }
+    else { Fail ($S.startFail -f $Port) }
 }
 
 # ---- boot-on-start (only with -AutoStart) -----------------------------------
