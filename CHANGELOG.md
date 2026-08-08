@@ -48,5 +48,5 @@ The first complete release of FrameSync — a local-first, multi-screen MP4 pres
 - **Bilingual UI** — instant switching between 简体中文 and English, with the choice persisted.
 - **Nginx serving helpers** for reaching the presenter over a LAN on Windows.
 
-[Unreleased]: https://github.com/jasonshen/multi-screen-video-presenter/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/jasonshen/multi-screen-video-presenter/releases/tag/v1.0.0
+[Unreleased]: https://github.com/zhi-ai-lab/multi-screen-video-presenter/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/zhi-ai-lab/multi-screen-video-presenter/releases/tag/v1.0.0

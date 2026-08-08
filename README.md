@@ -6,6 +6,8 @@
 
 English · [简体中文](README.zh.md) · [Changelog](CHANGELOG.md)
 
+**[▶ Live demo](https://zhi-ai-lab.github.io/multi-screen-video-presenter/)**
+
 </div>
 
 Load local MP4s into separate playing sections and drive every screen from one control deck — play, pause, loop, and level them together with a keyboard or a click. Nothing is uploaded: each file is read straight from disk in the browser, so your videos and their file names never leave the machine. It's a single static page, so you can open it directly on one computer, or serve the folder with nginx to reach the presenter (and share videos) from every screen on your LAN.
@@ -142,4 +144,4 @@ multi-screen-video-presenter/
 
 ## License
 
-No license file yet — all rights reserved by default until one is added.
+Released under the [MIT License](LICENSE) — © 2026 Zhi AI Lab.

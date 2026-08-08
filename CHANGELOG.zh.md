@@ -48,5 +48,5 @@ FrameSync 的首个完整版本——一台本地优先的多屏 MP4 演示台�
 - **双语界面**——在简体中文与 English 之间即时切换，选择会被保留。
 - **nginx 服务脚本**——用于在 Windows 上通过局域网提供该文件夹。
 
-[未发布]: https://github.com/jasonshen/multi-screen-video-presenter/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/jasonshen/multi-screen-video-presenter/releases/tag/v1.0.0
+[未发布]: https://github.com/zhi-ai-lab/multi-screen-video-presenter/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/zhi-ai-lab/multi-screen-video-presenter/releases/tag/v1.0.0

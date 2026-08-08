@@ -6,6 +6,8 @@
 
 [English](README.md) · 简体中文 · [更新日志](CHANGELOG.zh.md)
 
+**[▶ 在线演示](https://zhi-ai-lab.github.io/multi-screen-video-presenter/)**
+
 </div>
 
 将本地 MP4 载入不同的播放区块，用一个控制台驱动每一块屏幕——用键盘或鼠标一起播放、暂停、循环、调节音量。任何内容都不会被上传：每个文件都在浏览器中直接从磁盘读取，视频及其文件名始终不离开这台机器。它是一个静态页面，因此既可以在单机上直接打开，也可以用 nginx 提供服务，让局域网内的每块屏幕都能访问演示台（并共享视频）。
@@ -142,4 +144,4 @@ multi-screen-video-presenter/
 
 ## 许可协议
 
-暂未包含许可文件——在添加之前，默认保留一切权利。
+基于 [MIT 许可证](LICENSE) 发布 —— © 2026 Zhi AI Lab。
