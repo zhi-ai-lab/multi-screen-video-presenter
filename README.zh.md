@@ -76,7 +76,7 @@ bash install.sh --yes --port 8081
 3. **生成配置。** 复制 [`nginx.conf.template`](nginx.conf.template)，把每个 `{{...}}` 占位符替换成真实值——端口、要提供服务的文件夹（`{{SITE_ROOT}}`）、日志/临时目录，以及 `{{VIDEO_ROOT}}`（要共享的视频所在文件夹）。即使在 Windows 上也用正斜杠。
 4. **启动**，让 nginx 指向你填好的配置：
    ```bash
-   nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf
+   nginx -p ./local/nginx-runtime -c nginx.conf
    ```
 
 ### 启动、停止、重启
@@ -87,18 +87,18 @@ bash install.sh --yes --port 8081
 
 ```powershell
 .\install.cmd -Yes                                                                  # 启动 / 重启（重新生成配置）
-nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf             # 用现有配置启动
-nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s reload   # 修改配置后重载
-nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s stop     # 停止
+nginx\nginx.exe -p local\nginx-runtime -c nginx.conf             # 用现有配置启动
+nginx\nginx.exe -p local\nginx-runtime -c nginx.conf -s reload   # 修改配置后重载
+nginx\nginx.exe -p local\nginx-runtime -c nginx.conf -s stop     # 停止
 ```
 
 **macOS / Linux**
 
 ```bash
 bash install.sh --yes                                                        # 启动 / 重启（重新生成配置）
-nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf           # 用现有配置启动
-nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s reload # 修改配置后重载
-nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s stop   # 停止
+nginx -p ./local/nginx-runtime -c nginx.conf           # 用现有配置启动
+nginx -p ./local/nginx-runtime -c nginx.conf -s reload # 修改配置后重载
+nginx -p ./local/nginx-runtime -c nginx.conf -s stop   # 停止
 ```
 
 **重启：** 要么重新运行安装脚本，要么先 `stop` 再 `start`。若只改了配置，用 `-s reload` 即可无中断生效。

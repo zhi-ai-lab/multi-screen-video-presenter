@@ -76,7 +76,7 @@ On Windows the installer downloads the nginx **1.31.3** Windows build. On macOS/
 3. **Make the config.** Copy [`nginx.conf.template`](nginx.conf.template) and replace every `{{...}}` token — the port, the folder to serve (`{{SITE_ROOT}}`), the log/temp dirs, and `{{VIDEO_ROOT}}` (the folder of videos to share). Use forward slashes, even on Windows.
 4. **Start it**, pointing nginx at your filled-in config:
    ```bash
-   nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf
+   nginx -p ./local/nginx-runtime -c nginx.conf
    ```
 
 ### Start, stop, restart
@@ -87,18 +87,18 @@ Run these from the project root. Re-running the installer (`-Yes` / `--yes`) rec
 
 ```powershell
 .\install.cmd -Yes                                                                  # start / restart (fresh config)
-nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf             # start with existing config
-nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s reload   # reload after editing config
-nginx\nginx.exe -p local\nginx-runtime -c local\nginx-runtime\nginx.conf -s stop     # stop
+nginx\nginx.exe -p local\nginx-runtime -c nginx.conf             # start with existing config
+nginx\nginx.exe -p local\nginx-runtime -c nginx.conf -s reload   # reload after editing config
+nginx\nginx.exe -p local\nginx-runtime -c nginx.conf -s stop     # stop
 ```
 
 **macOS / Linux**
 
 ```bash
 bash install.sh --yes                                                        # start / restart (fresh config)
-nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf           # start with existing config
-nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s reload # reload after editing config
-nginx -p ./local/nginx-runtime -c ./local/nginx-runtime/nginx.conf -s stop   # stop
+nginx -p ./local/nginx-runtime -c nginx.conf           # start with existing config
+nginx -p ./local/nginx-runtime -c nginx.conf -s reload # reload after editing config
+nginx -p ./local/nginx-runtime -c nginx.conf -s stop   # stop
 ```
 
 **To restart:** either re-run the installer, or `stop` then `start`. If you only changed the config, `-s reload` applies it with no downtime.
