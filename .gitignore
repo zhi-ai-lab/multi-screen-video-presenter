@@ -1,0 +1,5 @@
+# Local nginx binary distribution (not source)
+nginx/
+
+# Windows shortcuts
+*.lnk
